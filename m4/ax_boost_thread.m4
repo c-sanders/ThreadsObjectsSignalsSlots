@@ -19,28 +19,25 @@ dnl @author Michael Tindal <mtindal@paradoxpoint.com>
 dnl @version 2006-06-15
 dnl @license AllPermissive
 
-AC_DEFUN(
-	[AX_BOOST_THREAD],
-	[
-		AC_ARG_WITH(
-			[boost-thread],
-			[AS_HELP_STRING(
-				[--with-boost-thread@<:@=special-lib@:>@],
-				[use the Thread library from boost - it is possible to specify a certain library for the linker e.g. --with-boost-thread=boost_thread-gcc-mt ]),
-			[
-				if test "$withval" = "no"; then
-					want_boost="no"
-				elif test "$withval" = "yes"; then
-					want_boost="yes"
-					ax_boost_user_thread_lib=""
-				else
-					want_boost="yes"
-					ax_boost_user_thread_lib="$withval"
-				fi
-			],
-			[
-				want_boost="no"
-			]])
+AC_DEFUN([AX_BOOST_THREAD],
+[
+	AC_ARG_WITH([boost-thread],
+	AS_HELP_STRING([--with-boost-thread@<:@=special-lib@:>@],
+                   [use the Thread library from boost - it is possible to specify a certain library for the linker
+                        e.g. --with-boost-thread=boost_thread-gcc-mt ]),
+        [
+        if test "$withval" = "no"; then
+			want_boost="no"
+        elif test "$withval" = "yes"; then
+            want_boost="yes"
+            ax_boost_user_thread_lib=""
+        else
+		    want_boost="yes"
+        	ax_boost_user_thread_lib="$withval"
+		fi
+        ],
+        [want_boost="no"]
+	)
 
 	if test "x$want_boost" = "xyes"; then
         AC_REQUIRE([AC_PROG_CC])
